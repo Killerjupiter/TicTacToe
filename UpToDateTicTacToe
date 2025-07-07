@@ -1,3 +1,4 @@
+#By Bealex my discord is bealex if you need me
 #Game Board could of probably been a dictionary
 Num_row = ("   1   2   3")
 row_a = ["A|", " ", "|", " ", "|", " "]
@@ -30,6 +31,11 @@ pwin = False
 #Enemy variables
 O = None
 ewin = False
+
+#random numbers we have none
+rnumbers = []
+rnumber_used = []
+
 
 #first print of board at clean slate
 print("This is TicTacToe, to play type row A, B, or C " 
@@ -98,13 +104,29 @@ while pwin == False:
     print(" ".join(row_b))
     print(border_b)
     print(" ".join(row_c))
-
+    print("  ")
+    print("  ")
+    print("  ")
+    print("Taken Squares")
     print(taken_areas) #Make sure to delete when done
+    
+
+    #Probably win conditions
+    if row_a[1] == "x":
+        if row_a[3] == "x":
+            if row_a[5] == "x":
+                print("YOU WIN!!! Do you want to play again?")
+                row_a[1] = "W"
+                row_a[3] = "W"
+                row_a[5] = "W"
+                pwin = True
+                restart = input("Y for YES and N for NO:  ").capitalize()
+                if restart == "Y":
+                    taken_areas = []
+                    pwin = False
+
 
     #Hopefully O's algorithm
-
-
-    print(taken_areas)
 
     while O == None:
         player_1L = None
@@ -112,7 +134,6 @@ while pwin == False:
         if "B2" not in taken_areas:
             row_b[3] = "o"
             taken_areas.append("B2")
-            print(taken_areas)
             O = True
         elif "B2" in taken_areas:
             if "A2" not in taken_areas:
@@ -138,3 +159,6 @@ while pwin == False:
     print(" ".join(row_b))
     print(border_b)
     print(" ".join(row_c))
+    print("  ")
+    print("  ")
+    print("  ")
