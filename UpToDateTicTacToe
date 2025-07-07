@@ -1,0 +1,108 @@
+#Game Board could of probably been a dictionary
+Num_row = ("   1   2   3")
+row_a = ["A|", " ", "|", " ", "|", " "]
+border_a = ("   ----------")
+row_b = ["B|", " ", "|", " ", "|", " "]
+border_b = ("   ----------")
+row_c = ["C|" ," ", "|", " ", "|", " "]
+
+#Valid Inputs
+InputsL = ("A", "B", "C")
+InputsN = ("1", "2","3")
+
+#invalid Inputs
+taken_areas = []
+
+#defines board placement maybe
+y = None
+x = None
+
+#Below handles player Input
+player_1L = None
+player_1N = None
+
+#Below Prints the board
+print("This is TicTacToe, to play type row A, B, or C " 
+"and than select the number on that row 1, 2, or 3")
+
+print(Num_row)
+print(" ".join(row_a))
+print(border_a)
+print(" ".join(row_b))
+print(border_b)
+print(" ".join(row_c))
+
+
+#Decides position
+while player_1L not in InputsL:
+    player_1LL = input("Input Letter:")
+    player_1L = player_1LL.capitalize()
+    if player_1L in InputsL:
+        y = player_1L
+    if player_1L not in InputsL:
+        print("Not a valid option")
+while player_1N not in InputsN:
+    player_1N = input("Input Number:")
+    if player_1N in InputsN:
+        x = player_1N
+    if player_1N not in InputsN:
+        print("Not a valid option")
+
+#Should make the choice repeat if already taken position
+while player_1L + player_1N in taken_areas:
+    player_1L = None
+    player_1N = None
+    print("That area is already taken.")
+    while player_1L not in InputsL:
+        player_1LL = input("Input Letter:")
+        player_1L = player_1LL.capitalize()
+        if player_1L in InputsL:
+            y = player_1L
+        if player_1L not in InputsL:
+            print("Not a valid option")
+    while player_1N not in InputsN:
+        player_1N = input("Input Number:")
+        if player_1N in InputsN:
+            x = player_1N
+        if player_1N not in InputsN:
+            print("Not a valid option")
+
+    
+ln1 = player_1L + player_1N 
+
+
+print("player", ln1)
+
+#handles palyer board placement
+taken_areas.append(y + x)
+if y == "A":
+    if x == "1":
+        row_a[1] = "x"
+    if x == "2":
+        row_a[3] = "x"
+    if x == "3":
+        row_a[5] = "x"
+if y == "B":
+    if x == "1":
+        row_b[1] = "x"
+    if x == "2":
+        row_b[3] = "x"
+    if x == "3":
+        row_b[5] = "x"
+if y == "C":
+    if x == "1":
+        row_c[1] = "x"
+    if x == "2":
+        row_c[3] = "x"
+    if x == "3":
+        row_c[5] = "x"
+
+#test print
+print(Num_row)
+print(" ".join(row_a))
+print(border_a)
+print(" ".join(row_b))
+print(border_b)
+print(" ".join(row_c))
+
+print(taken_areas) #Make sure to delete when done
