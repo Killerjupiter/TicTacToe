@@ -1,11 +1,18 @@
 #By Bealex my discord is bealex if you need me
+
+
+def yxrow(a,): 
+    b = "|"
+    return [a, " ", b, " ", b, " "]
+
+
 #Game Board could of probably been a dictionary
 Num_row = ("   1   2   3")
-row_a = ["A|", " ", "|", " ", "|", " "]
+row_a = yxrow("A")
 border_a = ("   ----------")
-row_b = ["B|", " ", "|", " ", "|", " "]
+row_b = yxrow("B")
 border_b = ("   ----------")
-row_c = ["C|" ," ", "|", " ", "|", " "]
+row_c = yxrow("C")
 
 #Valid Inputs
 InputsL = ("A", "B", "C")
