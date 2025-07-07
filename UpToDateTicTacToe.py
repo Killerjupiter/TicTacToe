@@ -14,17 +14,6 @@ row_b = yxrow("B")
 border_b = (" -----------")
 row_c = yxrow("C")
 
-#functions that are defined here 
-def yx_move(inputy, row): #Converts input into cordinates to put into the board using the x and y values
-    if y == inputy:
-        x_move(1, 1, row)
-        x_move(2, 3, row)
-        x_move(3, 5, row)
-def x_move(inputx, convert_position, row): #takes x and given y cordinates and places the X on the board in that positon
-        if x == (str(inputx)):
-            row[convert_position] = "x" 
-    
-
 #Valid Inputs
 InputsL = ("A", "B", "C")
 InputsN = ("1", "2","3")
@@ -54,10 +43,26 @@ ewin = False
 rnumbers = []
 rnumber_used = []
 
+#functions that are defined here 
+def yx_move(inputy, row): #Converts input into cordinates to put into the board using the x and y values
+    if y == inputy:
+        x_move(1, 1, row)
+        x_move(2, 3, row)
+        x_move(3, 5, row)
 
-#first print of board at clean slate
-print("This is TicTacToe, to play type row A, B, or C " 
-    "and than select the number on that row 1, 2, or 3")
+def x_move(inputx, convert_position, row): #takes x and given y cordinates and places the X on the board in that positon
+        if x == (str(inputx)):
+            row[convert_position] = "x" 
+
+def winrow(a):
+    a[1] = "W"
+    a[3] = "W"
+    a[5] = "W"
+
+def winner():
+    winrow(row_a)
+    winrow(row_b)
+    winrow(row_c)
 
 def printboard():
     print(Num_row)
@@ -69,6 +74,11 @@ def printboard():
     print("  ")
     print("  ")
     print("  ")
+    
+
+#first print of board at clean slate
+print("This is TicTacToe, to play type row A, B, or C " 
+    "and than select the number on that row 1, 2, or 3")
 
 #prints clean board
 printboard() 
@@ -107,22 +117,17 @@ while pwin == False:
     #prints board after players move
     printboard()
 
-    print(taken_areas) #Make sure to delete when done
-
     #Probably win conditions
     if row_a[1] == "x":
         if row_a[3] == "x":
             if row_a[5] == "x":
                 print("YOU WIN!!! Do you want to play again?")
-                row_a[1] = "W"
-                row_a[3] = "W"
-                row_a[5] = "W"
+                winner()
                 pwin = True
                 restart = input("Y for YES and N for NO:  ").capitalize()
                 if restart == "Y":
                     taken_areas = []
                     pwin = False
-
 
     #Hopefully O's algorithm
 
