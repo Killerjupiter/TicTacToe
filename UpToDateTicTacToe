@@ -41,12 +41,18 @@ rnumber_used = []
 print("This is TicTacToe, to play type row A, B, or C " 
     "and than select the number on that row 1, 2, or 3")
 
-print(Num_row)
-print(" ".join(row_a))
-print(border_a)
-print(" ".join(row_b))
-print(border_b)
-print(" ".join(row_c))
+def printboard():
+    print(Num_row)
+    print(" ".join(row_a))
+    print(border_a)
+    print(" ".join(row_b))
+    print(border_b)
+    print(" ".join(row_c))
+    print("  ")
+    print("  ")
+    print("  ")
+
+printboard()
 
 #Game loop
 while pwin == False:
@@ -75,39 +81,24 @@ while pwin == False:
 
     #handles palyer board placement
     taken_areas.append(player_1L + player_1N)
-    if y == "A":
-        if x == "1":
-            row_a[1] = "x"
-        if x == "2":
-            row_a[3] = "x"
-        if x == "3":
-            row_a[5] = "x"
-    if y == "B":
-        if x == "1":
-            row_b[1] = "x"
-        if x == "2":
-            row_b[3] = "x"
-        if x == "3":
-            row_b[5] = "x"
-    if y == "C":
-        if x == "1":
-            row_c[1] = "x"
-        if x == "2":
-            row_c[3] = "x"
-        if x == "3":
-            row_c[5] = "x"
+    def yx_move(inputy, row): #Converts input into cordinates to put into the board using the x and y values
+        if y == inputy:
+            x_move(1, 1, row)
+            x_move(2, 3, row)
+            x_move(3, 5, row)
+    def x_move(inputx, convert_position, row): #takes x and given y cordinates and places the X on the board in that positon
+            if x == (str(inputx)):
+                row[convert_position] = "x" 
+    
+    yx_move("A", row_a)
+    yx_move("B", row_b)
+    yx_move("C", row_c)
+    
 
     #test print
-    print(Num_row)
-    print(" ".join(row_a))
-    print(border_a)
-    print(" ".join(row_b))
-    print(border_b)
-    print(" ".join(row_c))
-    print("  ")
-    print("  ")
-    print("  ")
-    print("Taken Squares")
+    printboard()
+
+
     print(taken_areas) #Make sure to delete when done
     
 
@@ -151,14 +142,5 @@ while pwin == False:
                 taken_areas.append("B3")
                 O = True
 
-
     #test print
-    print(Num_row)
-    print(" ".join(row_a))
-    print(border_a)
-    print(" ".join(row_b))
-    print(border_b)
-    print(" ".join(row_c))
-    print("  ")
-    print("  ")
-    print("  ")
+    printboard()
