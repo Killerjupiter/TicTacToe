@@ -26,6 +26,10 @@ x1 = None
 player_1L = None
 player_1N = None
 
+#Enemy variables
+O = None
+random = 21
+
 #Below Prints the board
 print("This is TicTacToe, to play type row A, B, or C " 
 "and than select the number on that row 1, 2, or 3")
@@ -40,28 +44,30 @@ print(" ".join(row_c))
 
 #Decides position
 while player_1L not in InputsL or player_1N not in InputsN or player_1L + player_1N in taken_areas:
+    random *= 3
     player_1LL = input("Input Letter and Number:").capitalize()
     xy1 = list(player_1LL)
     player_1L = xy1[0]
     player_1N = xy1[1]
     if player_1L + player_1N in taken_areas:
         print("That area is already taken")
+        random *= 5
     if player_1L in InputsL:
         y = player_1L
+        random *= 2
     if player_1L not in InputsL:
         print("Not a valid option")
+        random *= 1
     if player_1N in InputsN:
         x = player_1N
+        random *= 4
     if player_1N not in InputsN:
         print("Not a valid option")
+        random += 7
 
-    
-print(player_1L + player_1N) 
-ln1 = player_1L + player_1N
 
-print("player", ln1)
 #handles palyer board placement
-taken_areas = (player_1L + player_1N)
+taken_areas.append(player_1L + player_1N)
 if y == "A":
     if x == "1":
         row_a[1] = "x"
@@ -93,3 +99,49 @@ print(border_b)
 print(" ".join(row_c))
 
 print(taken_areas) #Make sure to delete when done
+
+#Hopefully O's algorithm
+
+if random / 2 == float():
+    random %= 7
+    print("modulated", random)
+if random / 2 != float():
+    random += 1
+    random %= 7
+    print("even random", random)
+if random not in (1, 3, 5,):
+    random = player_1N
+
+
+
+
+while O == None:
+    if "B2" not in taken_areas:
+        row_b[3] = "o"
+        random += 33
+        O = True
+    if "B2" in taken_areas:
+        if row_a[1] and row_a[3] and row_a[5] not in taken_areas and row_a[random] in InputsLN or " ":
+            row_a[random] = "o"
+            random *= 2
+            O = True
+        elif row_c[1] and row_c[3] and row_c[5] not in taken_areas and row_c[random] in InputsLN or " ":
+            row_c[random] = "o"
+            random *= 3
+            O = True
+    
+    elif "B2" in taken_areas:
+        if row_b[1] or row_b[5] not in taken_areas and row_b[random] in InputsLN or " ":
+            row_b[random] = "o"
+            random *= 6
+            O = True
+
+
+#test print
+print(Num_row)
+print(" ".join(row_a))
+print(border_a)
+print(" ".join(row_b))
+print(border_b)
+print(" ".join(row_c))
+
