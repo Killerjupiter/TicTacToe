@@ -9,10 +9,21 @@ def yxrow(a,):
 #Game Board could of probably been a dictionary
 Num_row = ("   1   2   3")
 row_a = yxrow("A")
-border_a = ("   ----------")
+border_a = (" -----------")
 row_b = yxrow("B")
-border_b = ("   ----------")
+border_b = (" -----------")
 row_c = yxrow("C")
+
+#functions that are defined here 
+def yx_move(inputy, row): #Converts input into cordinates to put into the board using the x and y values
+    if y == inputy:
+        x_move(1, 1, row)
+        x_move(2, 3, row)
+        x_move(3, 5, row)
+def x_move(inputx, convert_position, row): #takes x and given y cordinates and places the X on the board in that positon
+        if x == (str(inputx)):
+            row[convert_position] = "x" 
+    
 
 #Valid Inputs
 InputsL = ("A", "B", "C")
@@ -59,7 +70,8 @@ def printboard():
     print("  ")
     print("  ")
 
-printboard()
+#prints clean board
+printboard() 
 
 #Game loop
 while pwin == False:
@@ -86,28 +98,16 @@ while pwin == False:
             
 
 
-    #handles palyer board placement
+    #handles palyer board placement uses def yx_move and def x_move at the top of the project
     taken_areas.append(player_1L + player_1N)
-    def yx_move(inputy, row): #Converts input into cordinates to put into the board using the x and y values
-        if y == inputy:
-            x_move(1, 1, row)
-            x_move(2, 3, row)
-            x_move(3, 5, row)
-    def x_move(inputx, convert_position, row): #takes x and given y cordinates and places the X on the board in that positon
-            if x == (str(inputx)):
-                row[convert_position] = "x" 
-    
     yx_move("A", row_a)
     yx_move("B", row_b)
     yx_move("C", row_c)
     
-
-    #test print
+    #prints board after players move
     printboard()
 
-
     print(taken_areas) #Make sure to delete when done
-    
 
     #Probably win conditions
     if row_a[1] == "x":
@@ -134,20 +134,27 @@ while pwin == False:
             taken_areas.append("B2")
             O = True
         elif "B2" in taken_areas:
-            if "A2" not in taken_areas:
-                row_a[3] = "o"
-                taken_areas.append("A2")
+            if "A1" not in taken_areas and "C3" not in taken_areas:
+                row_a[1] = "o"
+                taken_areas.append("A1")
                 O = True
-            elif "C1" not in taken_areas:
-                row_c[3] = "o"
-                taken_areas.append("C2")
+            elif "C1" not in taken_areas and "A1" not in taken_areas:
+                row_c[1] = "o"
+                taken_areas.append("C1")
                 O = True
-        
-        elif "B2" in taken_areas:
-            if "B3" not in taken_areas:
-                row_b[5] = "o"
-                taken_areas.append("B3")
+            elif "C3" not in taken_areas:
+                row_c[5] = "o"
+                taken_areas.append("C3")
                 O = True
+            elif "A3" not in taken_areas:
+                row_a[5] = "o"
+                taken_areas.append("A3")
+                O = True
+        elif "A1" and "A3" and"C1" and "C3" in taken_areas:
+            row_b[5] = "o"
+            taken_areas.append("B3")
+            O = True
+    
 
-    #test print
+    #prints board after enemies move
     printboard()
