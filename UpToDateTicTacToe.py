@@ -1,6 +1,6 @@
 #By Bealex my discord is bealex if you need me
 
-
+#fuction controls row size, thinking of expanding upon functionality for other stuff
 def yxrow(a,): 
     b = "|"
     return [a, " ", b, " ", b, " "]
