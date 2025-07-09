@@ -276,11 +276,11 @@ while win == False:
                 rnumbners = randint(1, 4)
                 if rnumbners == 1:
                     ochoice(row_a, 1, "A1")
-                if rnumbners == 2:
+                elif rnumbners == 2:
                     ochoice(row_a, 3, "A3")
-                if rnumbners == 3:
+                elif rnumbners == 3:
                     ochoice(row_c, 1, "C1")
-                if rnumbners == 4:
+                elif rnumbners == 4:
                     ochoice(row_c, 3, "C3")
             elif "A1" not in taken_areas and "C3" not in taken_areas:
                 ochoice(row_a, 1, "A1")
