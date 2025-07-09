@@ -115,7 +115,7 @@ def check_winner(a, z, c, d, e, f, g,):
                     elif input() == "N":
                         print("Thanks for playing!")
                         exit()
-                if b[g] == "o":
+                elif b[g] == "o":
                     winner("o")
                     clear_game()
                     ewin += 1
@@ -140,6 +140,7 @@ def check_winner1():
     check_winner(row_b, row_b, row_b, 1, 3, 5, 0)
     check_winner(row_b, row_b, row_b, 1, 3, 5, 1)
     check_winner(row_c, row_c, row_c, 1, 3, 5, 0)
+    check_winner(row_c, row_c, row_c, 1, 3, 5, 1)
     check_winner(row_a, row_b, row_c, 1, 1, 1, 0)#checks columns
     check_winner(row_a, row_b, row_c, 1, 1, 1, 1)
     check_winner(row_a, row_b, row_c, 3, 3, 3, 0)
@@ -305,5 +306,11 @@ while win == False:
                 loop_breaker += 1
             if loop_breaker >= 10:
                 print("Tie, no more moves available")
+                print("YOU Tied!!! Do you want to play again?")
+                if input().capitalize() == "Y":#Honestly don't know if this works
+                    clear_game()
+                    winner(" ")
+                    win = False
+
     #prints board after enemies move
     printboard()
