@@ -8,6 +8,11 @@ def yxrow(a,):
     b = "|"
     return [a, " ", b, " ", b, " "]
 
+#Win condition variables
+win = False
+ewin = 0
+pwin = 0
+
 
 #Game Board could of probably been a dictionary
 Num_row = ("   1   2   3")
@@ -32,15 +37,30 @@ x = None
 xy1 = None
 y1 = None
 x1 = None
-
-#Below handles player Input
+#Below handles player Input 
 player_1L = None
 player_1N = None
-pwin = False
-
 #Enemy variables
 O = None
-ewin = False
+#invalid Inputs
+taken_areas = []
+
+def clear_game():
+    global y, x, xy1, y1, x1, player_1L, player_1N, O, taken_areas
+    #defines board placement maybe
+    y = None
+    x = None
+    #input splitter values
+    xy1 = None
+    y1 = None
+    x1 = None
+    #Below handles player Input 
+    player_1L = None
+    player_1N = None
+    #Enemy variables
+    O = None
+    #invalid Inputs
+    taken_areas = []
 
 #random numbers we have none
 rnumber_used = []
@@ -56,17 +76,80 @@ def x_move(inputx, convert_position, row): #takes x and given y cordinates and p
         if x == (str(inputx)):
             row[convert_position] = "x" 
 
-def winrow(a):
-    a[1] = "W"
-    a[3] = "W"
-    a[5] = "W"
+def winrow(a, b):
+    a[1] = b
+    a[3] = b
+    a[5] = b
 
-def winner():
-    winrow(row_a)
-    winrow(row_b)
-    winrow(row_c)
+def winner(a):
+    if a == "x":
+        winrow(row_a, "W")
+        winrow(row_b, "W")
+        winrow(row_c, "W")
+    if a == "o":
+        winrow(row_a, "L")
+        winrow(row_b, "L")
+        winrow(row_c, "L")
+    if a == " ": #board clear
+        winrow(row_a, " ")
+        winrow(row_b, " ")
+        winrow(row_c, " ")
 
+def check_winner(a, z, c, d, e, f, g,):
+    global win, pwin, ewin
+    b = ("x", "o")
+    if a[d] == b[g]:
+        if z[e] == b[g]:
+            if c[f] == b[g]:
+                if b[g] == "x":
+                    winner("x")
+                    clear_game()
+                    pwin += 1
+                    win = True
+                    print("YOU WIN!!! Do you want to play again?")
+                    input("Y to play again or N to quit: ").capitalize()
+                    if input().capitalize() == "Y":
+                        winner(" ")
+                        win = False
+                        printboard()
+                    elif input() == "N":
+                        print("Thanks for playing!")
+                        exit()
+                if b[g] == "o":
+                    winner("o")
+                    clear_game()
+                    ewin += 1
+                    win = True
+                    print("YOU LOSE!!! Do you want to play again?")
+                    if input().capitalize() == "Y":
+                        winner(" ")
+                        win = False
+                        printboard()
+                    elif input() == "N":
+                        print("Thanks for playing!")
+                        exit()
+
+   
+def check_winner1():
+    check_winner(row_a, row_b, row_c, 1, 3, 5, 0) #Checks for win conditions that are diagonal
+    check_winner(row_a, row_b, row_c, 1, 3, 5, 1) 
+    check_winner(row_a, row_b, row_c, 5, 3, 1, 0)
+    check_winner(row_a, row_b, row_c, 5, 3, 1, 1)
+    check_winner(row_a, row_a, row_a, 1, 3, 5, 0) #Checks for win conditions that are rows
+    check_winner(row_a, row_a, row_a, 1, 3, 5, 1)
+    check_winner(row_b, row_b, row_b, 1, 3, 5, 0)
+    check_winner(row_b, row_b, row_b, 1, 3, 5, 1)
+    check_winner(row_c, row_c, row_c, 1, 3, 5, 0)
+    check_winner(row_a, row_b, row_c, 1, 1, 1, 0)#checks columns
+    check_winner(row_a, row_b, row_c, 1, 1, 1, 1)
+    check_winner(row_a, row_b, row_c, 3, 3, 3, 0)
+    check_winner(row_a, row_b, row_c, 3, 3, 3, 1)
+    check_winner(row_a, row_b, row_c, 5, 5, 5, 0)
+    check_winner(row_a, row_b, row_c, 5, 5, 5, 1)
+    
 def printboard():
+    if pwin > 0 or ewin > 0:
+        print("Players Win:", pwin, "Enemies Win:", ewin)
     print(Num_row)
     print(" ".join(row_a))
     print(border_a)
@@ -76,6 +159,23 @@ def printboard():
     print("  ")
     print("  ")
     
+#function to handle enemy placement
+def ochoice(a, b, c): #Just allows me to put in the row
+        global O
+        if b == 1:
+            taken_areas.append(c)
+            a[b] = "o"
+            O = True
+        if b == 2:
+            b = 3
+            taken_areas.append(c)
+            a[b] = "o"
+            O = True
+        if b == 3:
+            b = 5
+            taken_areas.append(c)
+            a[b] = "o"
+            O = True
 
 #first print of board at clean slate
 print("This is TicTacToe, to play type row A, B, or C " 
@@ -85,7 +185,9 @@ print("This is TicTacToe, to play type row A, B, or C "
 printboard() 
 
 #Game loop
-while pwin == False:
+while win == False:
+
+    check_winner1() #checks if o won
 
     #Decides position
     while player_1L not in InputsL or player_1N not in InputsN or player_1L + player_1N in taken_areas:
@@ -105,12 +207,11 @@ while pwin == False:
                 x = player_1N
             if player_1N not in InputsN:
                 print("Not a valid option")
-            
+    taken_areas.append(player_1L + player_1N)        
             
 
 
     #handles palyer board placement uses def yx_move and def x_move at the top of the project
-    taken_areas.append(player_1L + player_1N)
     yx_move("A", row_a)
     yx_move("B", row_b)
     yx_move("C", row_c)
@@ -118,36 +219,13 @@ while pwin == False:
     #prints board after players move
     printboard()
 
-    #Probably win conditions
-    if row_a[1] == "x":
-        if row_a[3] == "x":
-            if row_a[5] == "x":
-                print("YOU WIN!!! Do you want to play again?")
-                winner()
-                pwin = True
-                restart = input("Y for YES and N for NO:  ").capitalize()
-                if restart == "Y":
-                    taken_areas = []
-                    pwin = False
+
+
+
+    check_winner1() #calls the function to check for win conditions
+
 
     #Hopefully O's algorithm
-
-    def ochoice(a, b, c): #Just allows me to put in the row
-            global O
-            if b == 1:
-                taken_areas.append(c)
-                a[b] = "o"
-                O = True
-            if b == 2:
-                b = 3
-                taken_areas.append(c)
-                a[b] = "o"
-                O = True
-            if b == 3:
-                b = 5
-                taken_areas.append(c)
-                a[b] = "o"
-                O = True
 
 
     #Enemy algorithm honestly don't know if it fully works
@@ -155,12 +233,19 @@ while pwin == False:
         player_1L = None
         player_1N = None
         rnumbners = randint(1, 3)
-        if "B2" not in taken_areas:
-            if rnumbners != 1:
-                 if "A1" and "A3" and"C1" and "C3" not in taken_areas:
-                    rnumbners = randint(1, 4)
-                    if rnumbners == 1 and "A1" not in taken_areas:
-                        ochoice(row_a, 1, "A1")
+        if row_a[3] not in taken_areas and row_a[1] == "o" and row_a[5] == "o":
+                ochoice(row_a, 2, "A2")
+        elif row_c[3] not in taken_areas and row_c[1] == "o" and row_c[5] == "o":
+            ochoice(row_c, 2, "C2")
+        elif row_b[1] not in taken_areas and row_a[1] == "o" and row_c[1] == "o":
+            ochoice(row_b, 1, "B1")
+        elif row_b[5] not in taken_areas and row_a[5] == "o" and row_c[5] == "o":
+            ochoice(row_b, 3, "B3")
+        elif "B2" not in taken_areas:
+            if all(x not in taken_areas for x in ["A1", "A3", "C1", "C3"]):
+                rnumbners = randint(1, 4)
+                if rnumbners == 1 and "A1" not in taken_areas:
+                    ochoice(row_a, 1, "A1")
 
                     if rnumbners == 2 and "A3" not in taken_areas:
                         ochoice(row_a, 3, "A3")
@@ -179,23 +264,15 @@ while pwin == False:
 
                     elif "C3" not in taken_areas:
                         ochoice(row_c, 3, "C3")
-                     
+                    
                     elif "A3" not in taken_areas:
                         ochoice(row_a, 3, "A3")  
             else:
                 row_b[3] = "o"
                 taken_areas.append("B2")
                 O = True
-        elif "B2" in taken_areas:
-            if row_a[3] not in taken_areas and row_a[1] == "o" and row_a[5] == "o":
-                ochoice(row_a, 2, "A2")
-            elif row_c[3] not in taken_areas and row_c[1] == "o" and row_c[5] == "o":
-                ochoice(row_c, 2, "C2")
-            elif row_b[1] not in taken_areas and row_a[1] == "o" and row_c[1] == "o":
-                ochoice(row_b, 1, "B1")
-            elif row_b[5] not in taken_areas and row_a[5] == "o" and row_c[5] == "o":
-                ochoice(row_b, 3, "B3")
-            elif all(x not in taken_areas for x in ["A1", "A3", "C1", "C3"]):
+        if "B2" in taken_areas:
+            if all(x not in taken_areas for x in ["A1", "A3", "C1", "C3"]):
                 rnumbners = randint(1, 4)
                 if rnumbners == 1:
                     ochoice(row_a, 1, "A1")
