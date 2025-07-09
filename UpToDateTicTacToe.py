@@ -1,5 +1,8 @@
 #By Bealex my discord is bealex if you need me
 
+#imported module for random number generation
+from random import randint, choice
+
 #fuction controls row size, thinking of expanding upon functionality for other stuff
 def yxrow(a,): 
     b = "|"
@@ -40,7 +43,6 @@ O = None
 ewin = False
 
 #random numbers we have none
-rnumbers = []
 rnumber_used = []
 
 #functions that are defined here 
@@ -71,7 +73,6 @@ def printboard():
     print(" ".join(row_b))
     print(border_b)
     print(" ".join(row_c))
-    print("  ")
     print("  ")
     print("  ")
     
@@ -131,35 +132,101 @@ while pwin == False:
 
     #Hopefully O's algorithm
 
+    def ochoice(a, b, c): #Just allows me to put in the row
+            global O
+            if b == 1:
+                taken_areas.append(c)
+                a[b] = "o"
+                O = True
+            if b == 2:
+                b = 3
+                taken_areas.append(c)
+                a[b] = "o"
+                O = True
+            if b == 3:
+                b = 5
+                taken_areas.append(c)
+                a[b] = "o"
+                O = True
+
+
+    #Enemy algorithm honestly don't know if it fully works
     while O == None:
         player_1L = None
         player_1N = None
+        rnumbners = randint(1, 3)
         if "B2" not in taken_areas:
-            row_b[3] = "o"
-            taken_areas.append("B2")
-            O = True
-        elif "B2" in taken_areas:
-            if "A1" not in taken_areas and "C3" not in taken_areas:
-                row_a[1] = "o"
-                taken_areas.append("A1")
-                O = True
-            elif "C1" not in taken_areas and "A1" not in taken_areas:
-                row_c[1] = "o"
-                taken_areas.append("C1")
-                O = True
-            elif "C3" not in taken_areas:
-                row_c[5] = "o"
-                taken_areas.append("C3")
-                O = True
-            elif "A3" not in taken_areas:
-                row_a[5] = "o"
-                taken_areas.append("A3")
-                O = True
-        elif "A1" and "A3" and"C1" and "C3" in taken_areas:
-            row_b[5] = "o"
-            taken_areas.append("B3")
-            O = True
-    
+            if rnumbners != 1:
+                 if "A1" and "A3" and"C1" and "C3" not in taken_areas:
+                    rnumbners = randint(1, 4)
+                    if rnumbners == 1 and "A1" not in taken_areas:
+                        ochoice(row_a, 1, "A1")
 
+                    if rnumbners == 2 and "A3" not in taken_areas:
+                        ochoice(row_a, 3, "A3")
+
+                    if rnumbners == 3 and "C1" not in taken_areas:
+                        ochoice(row_c, 1, "C1")
+
+                    if rnumbners == 4 and "C3" not in taken_areas:
+                        ochoice(row_c, 3, "C3")
+
+                    elif "A1" not in taken_areas and "C3" not in taken_areas:
+                        ochoice(row_a, 1, "A1")
+
+                    elif "C1" not in taken_areas and "A1" not in taken_areas:
+                        ochoice(row_c, 1, "C1")
+
+                    elif "C3" not in taken_areas:
+                        ochoice(row_c, 3, "C3")
+                     
+                    elif "A3" not in taken_areas:
+                        ochoice(row_a, 3, "A3")  
+            else:
+                row_b[3] = "o"
+                taken_areas.append("B2")
+                O = True
+        elif "B2" in taken_areas:
+            if row_a[3] not in taken_areas and row_a[1] == "o" and row_a[5] == "o":
+                ochoice(row_a, 2, "A2")
+            elif row_c[3] not in taken_areas and row_c[1] == "o" and row_c[5] == "o":
+                ochoice(row_c, 2, "C2")
+            elif row_b[1] not in taken_areas and row_a[1] == "o" and row_c[1] == "o":
+                ochoice(row_b, 1, "B1")
+            elif row_b[5] not in taken_areas and row_a[5] == "o" and row_c[5] == "o":
+                ochoice(row_b, 3, "B3")
+            elif all(x not in taken_areas for x in ["A1", "A3", "C1", "C3"]):
+                rnumbners = randint(1, 4)
+                if rnumbners == 1:
+                    ochoice(row_a, 1, "A1")
+                if rnumbners == 2:
+                    ochoice(row_a, 3, "A3")
+                if rnumbners == 3:
+                    ochoice(row_c, 1, "C1")
+                if rnumbners == 4:
+                    ochoice(row_c, 3, "C3")
+            elif "A1" not in taken_areas and "C3" not in taken_areas:
+                ochoice(row_a, 1, "A1")
+            elif all(x not in taken_areas for x in ["C1", "A1"]):
+                ochoice(row_c, 1, "C1")
+            elif "C3" not in taken_areas:
+                ochoice(row_c, 3, "C3")
+            elif "A3" not in taken_areas:
+                ochoice(row_a, 3, "A3")
+        elif all(x in taken_areas for x in ["A1", "A3", "C1", "C3"]):
+            loop_breaker = 0
+            while O is None and loop_breaker < 10:
+                rnumbners = randint(1, 4)
+                if rnumbners == 1 and "A2" not in taken_areas:
+                    ochoice(row_a, 2, "A2")
+                elif rnumbners == 2 and "B1" not in taken_areas:
+                    ochoice(row_b, 1, "B1")
+                elif rnumbners == 3 and "B3" not in taken_areas:
+                    ochoice(row_b, 3, "B3")
+                elif rnumbners == 4 and "C2" not in taken_areas:
+                    ochoice(row_c, 2, "C2")
+                loop_breaker += 1
+            if loop_breaker >= 10:
+                print("Tie, no more moves available")
     #prints board after enemies move
     printboard()
