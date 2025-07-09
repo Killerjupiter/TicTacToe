@@ -236,12 +236,16 @@ while win == False:
         rnumbners = randint(1, 3)
         if row_a[3] not in taken_areas and row_a[1] == "o" and row_a[5] == "o":
                 ochoice(row_a, 2, "A2")
+                
         elif row_c[3] not in taken_areas and row_c[1] == "o" and row_c[5] == "o":
             ochoice(row_c, 2, "C2")
+            
         elif row_b[1] not in taken_areas and row_a[1] == "o" and row_c[1] == "o":
             ochoice(row_b, 1, "B1")
+        
         elif row_b[5] not in taken_areas and row_a[5] == "o" and row_c[5] == "o":
             ochoice(row_b, 3, "B3")
+    
         elif "B2" not in taken_areas:
             if all(x not in taken_areas for x in ["A1", "A3", "C1", "C3"]):
                 rnumbners = randint(1, 4)
@@ -293,16 +297,24 @@ while win == False:
                 ochoice(row_a, 3, "A3")
         elif all(x in taken_areas for x in ["A1", "A3", "C1", "C3"]):
             loop_breaker = 0
-            while O is None and loop_breaker < 10:
+            T = None
+            while T is None and loop_breaker < 10:
                 rnumbners = randint(1, 4)
                 if rnumbners == 1 and "A2" not in taken_areas:
                     ochoice(row_a, 2, "A2")
+                    print("cheater")
+                    T = True
                 elif rnumbners == 2 and "B1" not in taken_areas:
                     ochoice(row_b, 1, "B1")
+                    print("cheater")
+                    T = True
                 elif rnumbners == 3 and "B3" not in taken_areas:
                     ochoice(row_b, 3, "B3")
+                    print("cheater")
+                    T = True
                 elif rnumbners == 4 and "C2" not in taken_areas:
                     ochoice(row_c, 2, "C2")
+                    T = True
                 loop_breaker += 1
             if loop_breaker >= 10:
                 print("Tie, no more moves available")
