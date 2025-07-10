@@ -104,6 +104,7 @@ def check_winner(a, z, c, d, e, f, g,):
             if c[f] == b[g]:
                 if b[g] == "x":
                     winner("x")
+                    printboard()
                     clear_game()
                     pwin += 1
                     win = True
@@ -118,6 +119,7 @@ def check_winner(a, z, c, d, e, f, g,):
                         exit()
                 elif b[g] == "o":
                     winner("o")
+                    printboard()
                     clear_game()
                     ewin += 1
                     win = True
@@ -151,6 +153,7 @@ def check_winner1():
     
 def printboard():
     if pwin > 0 or ewin > 0 or tie > 0:
+        print()
         print("Players Win:", pwin, "Enemies Win:", ewin, "Ties:", tie)
     print(Num_row)
     print(" ".join(row_a))
