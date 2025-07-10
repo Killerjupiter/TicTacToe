@@ -213,8 +213,6 @@ while win == False:
                 print("Not a valid option")
             #adds the area to the taken areas list
     taken_areas.append(player_1L + player_1N)        
-            
-
 
     #handles palyer board placement uses def yx_move and def x_move at the top of the project
     yx_move("A", row_a)
@@ -225,17 +223,13 @@ while win == False:
     printboard()
     print()
 
-
-
-
     check_winner1() #calls the function to check for win conditions
 
 
     #Hopefully O's algorithm
 
-
     #Enemy algorithm honestly don't know if it fully works
-    print(taken_areas)#####delete later
+    print(taken_areas)#####delete later actually delete all prints  for debugging
     while O == None:
         player_1L = None
         player_1N = None
