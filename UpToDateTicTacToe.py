@@ -309,13 +309,13 @@ while win == False:
                     if rnumbners == 1 and "A2" not in taken_areas:
                         ochoice(row_a, 2, "A2")
                         T = True
-                    if rnumbners == 2 and "B1" not in taken_areas:
+                    elif rnumbners == 2 and "B1" not in taken_areas:
                         ochoice(row_b, 1, "B1")
                         T = True
-                    if rnumbners == 3 and "B3" not in taken_areas:
+                    elif rnumbners == 3 and "B3" not in taken_areas:
                         ochoice(row_b, 3, "B3")
                         T = True
-                    if rnumbners == 4 and "C2" not in taken_areas:
+                    elif rnumbners == 4 and "C2" not in taken_areas:
                         ochoice(row_c, 2, "C2")
                         T = True
                     loop_breaker += 1
