@@ -289,7 +289,7 @@ while win == False:
             elif all(x in taken_areas for x in ["A1", "A3", "C1", "C3"]):
                 loop_breaker = 0
                 T = None
-                while T == None and loop_breaker < 10:
+                while T == None and loop_breaker < 20:
                     rnumbners = randint(1, 4)
                     print(rnumbners, "line 286")
                     if rnumbners == 1 and "A2" not in taken_areas:
@@ -305,7 +305,7 @@ while win == False:
                         ochoice(row_c, 2, "C2")
                         T = True
                     loop_breaker += 1
-                if loop_breaker >= 10:
+                if loop_breaker >= 20:
                     print("No valid moves left, skipping turn")
                     clear_game()
                     tie += 1
