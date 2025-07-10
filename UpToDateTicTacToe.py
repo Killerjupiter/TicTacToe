@@ -34,7 +34,7 @@ taken_areas = []
 y = None
 x = None
 #input splitter values
-xy1 = None
+xy1 = [None, None]
 y1 = None
 x1 = None
 #Below handles player Input 
@@ -195,19 +195,23 @@ while win == False:
         O = None
         player_1LL = input("Input Letter and Number:").capitalize()
         xy1 = list(player_1LL)
-        player_1L = xy1[0]
-        player_1N = xy1[1]
+        try:
+            player_1L = xy1[0]
+            player_1N = xy1[1]
+        except IndexError:
+            player_1N = "0"
         if player_1L + player_1N in taken_areas:
             print("That area is already taken")
         if player_1L + player_1N not in taken_areas:
             if player_1L in InputsL:
                 y = player_1L
-            if player_1L not in InputsL:
+            elif player_1L not in InputsL:
                 print("Not a valid option")
             if player_1N in InputsN:
                 x = player_1N
-            if player_1N not in InputsN:
+            elif player_1N not in InputsN:
                 print("Not a valid option")
+            #adds the area to the taken areas list
     taken_areas.append(player_1L + player_1N)        
             
 
