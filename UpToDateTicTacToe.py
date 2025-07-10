@@ -159,7 +159,6 @@ def printboard():
     print(border_b)
     print(" ".join(row_c))
     print("  ")
-    print("  ")
     
 #function to handle enemy placement
 def ochoice(a, b, c): #Just allows me to put in the row
@@ -182,7 +181,7 @@ def ochoice(a, b, c): #Just allows me to put in the row
 #first print of board at clean slate
 print("This is TicTacToe, to play type row A, B, or C " 
     "and than select the number on that row 1, 2, or 3")
-
+print("Example: A1, B2, or even C3")
 #prints clean board
 printboard() 
 
@@ -220,6 +219,7 @@ while win == False:
     
     #prints board after players move
     printboard()
+    print()
 
 
 
@@ -231,23 +231,25 @@ while win == False:
 
 
     #Enemy algorithm honestly don't know if it fully works
+    print(taken_areas)#####delete later
     while O == None:
         player_1L = None
         player_1N = None
         if row_a[3] not in taken_areas and row_a[1] == "o" and row_a[5] == "o":
             ochoice(row_a, 2, "A2")
-                
-        elif row_c[3] not in taken_areas and row_c[1] == "o" and row_c[5] == "o":
+            print(O)
+        if row_c[3] not in taken_areas and row_c[1] == "o" and row_c[5] == "o":
             ochoice(row_c, 2, "C2")
-            
-        elif row_b[1] not in taken_areas and row_a[1] == "o" and row_c[1] == "o":
+            print(O)
+        if row_b[1] not in taken_areas and row_a[1] == "o" and row_c[1] == "o":
             ochoice(row_b, 1, "B1")
-        
-        elif row_b[5] not in taken_areas and row_a[5] == "o" and row_c[5] == "o":
+            print(O)
+        if row_b[5] not in taken_areas and row_a[5] == "o" and row_c[5] == "o":
             ochoice(row_b, 3, "B3")
-    
+            print(O)
     
         if "B2" in taken_areas:
+            rnumbners = 0
             if all(x not in taken_areas for x in ["A1", "A3", "C1", "C3"]):
                     rnumbners = randint(1, 4)
                     if rnumbners == 1:
@@ -266,38 +268,32 @@ while win == False:
                 ochoice(row_c, 3, "C3")
             elif "A3" not in taken_areas:
                 ochoice(row_a, 3, "A3")
-            elif all(x in taken_areas for x in ["A1", "A3", "C1", "C3"]):
+            elif "A1" not in taken_areas:
+                ochoice(row_a, 1, "A1")
+            elif "C1" not in taken_areas:
+                ochoice(row_c, 1, "C1")
+            if all(x in taken_areas for x in ["A1", "A3", "C1", "C3"]):
                 loop_breaker = 0
                 T = None
                 while T is None and loop_breaker < 20:
                     rnumbners = randint(1, 4)
+                    print(rnumbners, "line 276")
                     if rnumbners == 1 and "A2" not in taken_areas:
                         ochoice(row_a, 2, "A2")
-                        print("cheater")
                         T = True
                     if rnumbners == 2 and "B1" not in taken_areas:
                         ochoice(row_b, 1, "B1")
-                        print("cheater")
                         T = True
                     if rnumbners == 3 and "B3" not in taken_areas:
                         ochoice(row_b, 3, "B3")
-                        print("cheater")
                         T = True
                     if rnumbners == 4 and "C2" not in taken_areas:
                         ochoice(row_c, 2, "C2")
                         T = True
-                    loop_breaker += 1
-                if loop_breaker >= 20:
-                    print("Tie, no more moves available")
-                    print("YOU Tied!!! Do you want to play again?")
-                    if input().capitalize() == "Y":#Honestly don't know if this works
-                        clear_game()
-                        winner(" ")
-                        win = False
-                        
-        elif "B2" not in taken_areas:
+
+        if "B2" not in taken_areas:
             rnumbners = randint(1, 8)
-            print(rnumbners)
+            print(rnumbners, "line 302")
             if all(x not in taken_areas for x in ["A1", "A3", "C1", "C3"]):
                 if rnumbners == 1 and "A1" not in taken_areas:
                     ochoice(row_a, 1, "A1")
@@ -318,3 +314,4 @@ while win == False:
 
     #prints board after enemies move
     printboard()
+    print()
