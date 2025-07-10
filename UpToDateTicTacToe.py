@@ -76,7 +76,7 @@ def x_move(inputx, convert_position, row): #takes x and given y cordinates and p
         if x == (str(inputx)):
             row[convert_position] = "x" 
 
-def winrow(a, b):
+def winrow(a, b):#Ussed inside of next defined function winner()
     a[1] = b
     a[3] = b
     a[5] = b
