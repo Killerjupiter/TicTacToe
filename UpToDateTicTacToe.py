@@ -229,67 +229,47 @@ while win == False:
 
     check_winner1() #calls the function to check for win conditions
 
-
     #Hopefully O's algorithm
-
-    #Enemy algorithm honestly don't know if it fully works
-    print(taken_areas)#####delete later actually delete all prints  for debugging
     while O == None:
         player_1L = None
         player_1N = None
         if "A2" not in taken_areas and row_a[1] == "o" and row_a[5] == "o":
             ochoice(row_a, 2, "A2")
-            print("line 240", O)
         elif "C2" not in taken_areas and row_c[1] == "o" and row_c[5] == "o":
             ochoice(row_c, 2, "C2")
-            print("line 243", O)
         elif "B1" not in taken_areas and row_a[1] == "o" and row_c[1] == "o":
             ochoice(row_b, 1, "B1")
-            print("line 246", O)
         elif "B3" not in taken_areas and row_a[5] == "o" and row_c[5] == "o":
             ochoice(row_b, 3, "B3")
-            print("line 249", O)
-
         elif "B2" in taken_areas:
             rnumbners = 0
             if all(x not in taken_areas for x in ["A1", "A3", "C1", "C3"]):
                     rnumbners = randint(1, 4)
                     if rnumbners == 1:
                         ochoice(row_a, 1, "A1")
-                        print("line 257")
                     if rnumbners == 2:
                         ochoice(row_a, 3, "A3")
-                        print("line 260")
                     if rnumbners == 3:
                         ochoice(row_c, 1, "C1")
-                        print("line 263")
                     if rnumbners == 4:
                         ochoice(row_c, 3, "C3")
-                        print("line 266")
             elif "A1" not in taken_areas and "C3" not in taken_areas:
                 ochoice(row_a, 1, "A1")
-                print("line 269")
             elif all(x not in taken_areas for x in ["C1", "A1"]):
                 ochoice(row_c, 1, "C1")
-                print("line 268")
             elif "C3" not in taken_areas:
                 ochoice(row_c, 3, "C3")
-                print("line 271")
             elif "A3" not in taken_areas:
                 ochoice(row_a, 3, "A3")
-                print("line 274")
             elif "A1" not in taken_areas:
                 ochoice(row_a, 1, "A1")
-                print("line 277")
             elif "C1" not in taken_areas:
                 ochoice(row_c, 1, "C1")
-                print("line 280")
             elif all(x in taken_areas for x in ["A1", "A3", "C1", "C3"]):
                 loop_breaker = 0
                 T = None
                 while T == None and loop_breaker < 20:
                     rnumbners = randint(1, 4)
-                    print(rnumbners, "line 286")
                     if rnumbners == 1 and "A2" not in taken_areas:
                         ochoice(row_a, 2, "A2")
                         T = True
@@ -322,20 +302,15 @@ while win == False:
         elif "B2" not in taken_areas:
             rnumbners = randint(1, 8)
             loop_breaker = 0
-            print(rnumbners, "line 302")
             if all(x not in taken_areas for x in ["A1", "A3", "C1", "C3"]) and rnumbners <= 4 and loop_breaker < 10:
                 if rnumbners == 1 and "A1" not in taken_areas:
                     ochoice(row_a, 1, "A1")
-                    print("line 312")
                 if rnumbners == 2 and "A3" not in taken_areas:
                     ochoice(row_a, 3, "A3")
-                    print("line 315")
                 if rnumbners == 3 and "C1" not in taken_areas:
                     ochoice(row_c, 1, "C1")
-                    print("line 318")
                 if rnumbners == 4 and "C3" not in taken_areas:
                     ochoice(row_c, 3, "C3")
-                    print("line 321")
                 loop_breaker += 1
             elif rnumbners > 5 and "B2" not in taken_areas:
                 row_b[3] = "o"
