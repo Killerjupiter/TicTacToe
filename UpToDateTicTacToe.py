@@ -199,6 +199,7 @@ while win == False:
             player_1L = xy1[0]
             player_1N = xy1[1]
         except IndexError:
+            player_1L = "A"
             player_1N = "0"
         if player_1L + player_1N in taken_areas:
             print("That area is already taken")
