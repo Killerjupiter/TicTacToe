@@ -206,13 +206,13 @@ while win == False:
             player_1N = "0"
         if player_1L + player_1N in taken_areas:
             print("That area is already taken")
-        if player_1L + player_1N not in taken_areas:
+        elif player_1L + player_1N not in taken_areas:
             if player_1L in InputsL:
                 y = player_1L
-            elif player_1L not in InputsL:
-                print("Not a valid option")
             if player_1N in InputsN:
                 x = player_1N
+            if player_1L not in InputsL:
+                print("Not a valid option")
             elif player_1N not in InputsN:
                 print("Not a valid option")
             #adds the area to the taken areas list
