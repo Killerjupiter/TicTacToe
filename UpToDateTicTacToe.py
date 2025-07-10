@@ -16,10 +16,9 @@ tie = 0
 
 #Game Board could of probably been a dictionary
 Num_row = ("   1   2   3")
-row_a = yxrow("A")
 border_a = (" -----------")
+row_a = yxrow("A")
 row_b = yxrow("B")
-border_b = (" -----------")
 row_c = yxrow("C")
 
 #Valid Inputs
@@ -159,7 +158,7 @@ def printboard():
     print(" ".join(row_a))
     print(border_a)
     print(" ".join(row_b))
-    print(border_b)
+    print(border_a)
     print(" ".join(row_c))
     print("  ")
     
