@@ -233,14 +233,51 @@ while win == False:
     while O == None:
         player_1L = None
         player_1N = None
+
+        def winning_move(a, b, c, d, e, f, g, h,): #will work on later and rename variables to replace likes 245-280 I want to say
+            z = ("x", "o")
+            if a[d] == z[g]:
+                if z[e] == z[g]:
+                    if c[f] == z[g]:
+                        if b[g] == "x":
+                            pass
+
         if "A2" not in taken_areas and row_a[1] == "o" and row_a[5] == "o":
-            ochoice(row_a, 2, "A2")
+                ochoice(row_a, 2, "A2")
         elif "C2" not in taken_areas and row_c[1] == "o" and row_c[5] == "o":
             ochoice(row_c, 2, "C2")
         elif "B1" not in taken_areas and row_a[1] == "o" and row_c[1] == "o":
             ochoice(row_b, 1, "B1")
         elif "B3" not in taken_areas and row_a[5] == "o" and row_c[5] == "o":
             ochoice(row_b, 3, "B3")
+        elif "A1" not in taken_areas and row_b[1] == "o" and row_c[1] == "o":
+            ochoice(row_a, 1, "A1")
+        elif "A2" not in taken_areas and row_b[3] == "o" and row_c[3] == "o":
+            ochoice(row_a, 2, "A2")
+        elif "A3" not in taken_areas and row_b[5] == "o" and row_c[5] == "o":
+            ochoice(row_a, 3, "A3")
+        elif "C1" not in taken_areas and row_a[1] == "o" and row_b[1] == "o":
+            ochoice(row_c, 1, "C1")
+        elif "C2" not in taken_areas and row_a[3] == "o" and row_b[3] == "o":
+            ochoice(row_c, 2, "C2")
+        elif "C3" not in taken_areas and row_a[5] == "o" and row_b[5] == "o":
+            ochoice(row_c, 3, "C3")
+        elif "B2" not in taken_areas and row_a[3] == "o" and row_c[3] == "o":   
+            ochoice(row_b, 2, "B2")
+        elif "B2" not in taken_areas and row_b[1] == "o" and row_b[5] == "o":
+            ochoice(row_b, 2, "B2")
+        elif "B2" not in taken_areas and row_a[1] == "o" and row_c[5] == "o":
+            ochoice(row_b, 2, "B2")
+        elif "B2" not in taken_areas and row_a[5] == "o" and row_c[1] == "o":
+            ochoice(row_b, 2, "B2")
+        elif "A1" not in taken_areas and row_b[3] == "o" and row_c[5] == "o":
+            ochoice(row_a, 1, "A1")
+        elif "A3" not in taken_areas and row_b[3] == "o" and row_c[1] == "o":
+            ochoice(row_a, 3, "A3")
+        elif "C1" not in taken_areas and row_b[3] == "o" and row_a[5] == "o":
+            ochoice(row_c, 1, "C1")
+        elif "C3" not in taken_areas and row_b[3] == "o" and row_a[1] == "o":
+            ochoice(row_c, 3, "C3")
         elif "B2" in taken_areas:
             rnumbners = 0
             if all(x not in taken_areas for x in ["A1", "A3", "C1", "C3"]):
